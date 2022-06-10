@@ -558,11 +558,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Seleciona dados 5</from>
-      <to>Gera Pedidos Atrasados</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Concatena Rua e Número</from>
       <to>Datas não nulas</to>
       <enabled>Y</enabled>
@@ -573,8 +568,28 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Datas não nulas</from>
+      <from>Pedidos únicos</from>
       <to>Gera Pedidos Falhos</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Datas não nulas</from>
+      <to>Seleciona dados 6</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Seleciona dados 6</from>
+      <to>Pedidos únicos</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Seleciona dados 5</from>
+      <to>Pedidos únicos 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Pedidos únicos 2</from>
+      <to>Gera Pedidos Atrasados</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -913,7 +928,7 @@
     </remotesteps>
     <GUI>
       <xloc>176</xloc>
-      <yloc>448</yloc>
+      <yloc>512</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1400,7 +1415,7 @@
     </remotesteps>
     <GUI>
       <xloc>528</xloc>
-      <yloc>448</yloc>
+      <yloc>512</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2227,7 +2242,7 @@
     </remotesteps>
     <GUI>
       <xloc>272</xloc>
-      <yloc>448</yloc>
+      <yloc>512</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2365,7 +2380,7 @@
     </remotesteps>
     <GUI>
       <xloc>64</xloc>
-      <yloc>448</yloc>
+      <yloc>512</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2481,7 +2496,7 @@
     </remotesteps>
     <GUI>
       <xloc>384</xloc>
-      <yloc>448</yloc>
+      <yloc>512</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2707,7 +2722,7 @@
     </remotesteps>
     <GUI>
       <xloc>272</xloc>
-      <yloc>544</yloc>
+      <yloc>608</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2757,7 +2772,7 @@
     </remotesteps>
     <GUI>
       <xloc>576</xloc>
-      <yloc>544</yloc>
+      <yloc>608</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2775,6 +2790,10 @@
     <fields>
       <field>
         <name>order_id</name>
+        <rename/>
+      </field>
+      <field>
+        <name>ship_via</name>
         <rename/>
       </field>
       <field>
@@ -2805,7 +2824,7 @@
     </remotesteps>
     <GUI>
       <xloc>432</xloc>
-      <yloc>544</yloc>
+      <yloc>608</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2872,6 +2891,18 @@
         <hyperlinkField/>
       </field>
       <field>
+        <name>ship_via</name>
+        <type>Integer</type>
+        <format/>
+        <title>Tipo de Frete</title>
+        <titleStyleCell/>
+        <styleCell/>
+        <commentField/>
+        <commentAuthorField/>
+        <formula>N</formula>
+        <hyperlinkField/>
+      </field>
+      <field>
         <name>order_date</name>
         <type>Date</type>
         <format/>
@@ -2917,8 +2948,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>848</xloc>
-      <yloc>544</yloc>
+      <xloc>976</xloc>
+      <yloc>608</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2936,6 +2967,10 @@
     <fields>
       <field>
         <name>order_id</name>
+        <rename/>
+      </field>
+      <field>
+        <name>ship_via</name>
         <rename/>
       </field>
       <field>
@@ -2962,7 +2997,7 @@
     </remotesteps>
     <GUI>
       <xloc>704</xloc>
-      <yloc>544</yloc>
+      <yloc>608</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3254,8 +3289,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
-      <yloc>368</yloc>
+      <xloc>624</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3271,7 +3306,7 @@
       <schema_name/>
     </partitioning>
     <send_true_to>Coloca valores padrão em campos nulos</send_true_to>
-    <send_false_to>Gera Pedidos Falhos</send_false_to>
+    <send_false_to>Seleciona dados 6</send_false_to>
     <compare>
       <condition>
         <negated>N</negated>
@@ -3310,6 +3345,184 @@
     <GUI>
       <xloc>400</xloc>
       <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Pedidos únicos</name>
+    <type>Unique</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <count_rows>N</count_rows>
+    <count_field/>
+    <reject_duplicate_row>N</reject_duplicate_row>
+    <error_description/>
+    <fields>
+      <field>
+        <name>order_id</name>
+        <case_insensitive>N</case_insensitive>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>512</xloc>
+      <yloc>384</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Seleciona dados 6</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>order_id</name>
+        <rename/>
+      </field>
+      <field>
+        <name>customer_id</name>
+        <rename/>
+      </field>
+      <field>
+        <name>employee_id</name>
+        <rename/>
+      </field>
+      <field>
+        <name>order_date</name>
+        <rename/>
+      </field>
+      <field>
+        <name>required_date</name>
+        <rename/>
+      </field>
+      <field>
+        <name>shipped_date</name>
+        <rename/>
+      </field>
+      <field>
+        <name>ship_via</name>
+        <rename/>
+      </field>
+      <field>
+        <name>freight</name>
+        <rename/>
+      </field>
+      <field>
+        <name>ship_name</name>
+        <rename/>
+      </field>
+      <field>
+        <name>ship_address</name>
+        <rename/>
+      </field>
+      <field>
+        <name>ship_city</name>
+        <rename/>
+      </field>
+      <field>
+        <name>ship_region</name>
+        <rename/>
+      </field>
+      <field>
+        <name>ship_postal_code</name>
+        <rename/>
+      </field>
+      <field>
+        <name>ship_country</name>
+        <rename/>
+      </field>
+      <field>
+        <name>company_name</name>
+        <rename/>
+      </field>
+      <field>
+        <name>product_id</name>
+        <rename/>
+      </field>
+      <field>
+        <name>unit_price</name>
+        <rename/>
+      </field>
+      <field>
+        <name>quantity</name>
+        <rename/>
+      </field>
+      <field>
+        <name>discount</name>
+        <rename/>
+      </field>
+      <field>
+        <name>address</name>
+        <rename/>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>400</xloc>
+      <yloc>384</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Pedidos únicos 2</name>
+    <type>Unique</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <count_rows>N</count_rows>
+    <count_field/>
+    <reject_duplicate_row>N</reject_duplicate_row>
+    <error_description/>
+    <fields>
+      <field>
+        <name>order_id</name>
+        <case_insensitive>N</case_insensitive>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>832</xloc>
+      <yloc>608</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
