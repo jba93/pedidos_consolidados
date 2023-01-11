@@ -1,4 +1,12 @@
-# pedidos_consolidados
+# Pedidos Consolidados
+
+### Tecnologias utilizadas
+Pentaho Data Integration e Excel
+
+### Desafio
+https://arrudaconsulting.com.br/
+
+### Descrição
 Pipeline de dados criado com o Pentaho Data Integration (Spoon) realizado no treinamento Pentaho + Excel oferecido pelo Arruda Consulting, com diversas modificações feitas por mim.
 
 O arquivo "transformacao.ktr" é uma transformação do Pentaho que inicia lendo os dados de três planilhas do Excel, localizadas dentro da pasta "planilhas": 
